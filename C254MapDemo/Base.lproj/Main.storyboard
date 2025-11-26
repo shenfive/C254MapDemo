@@ -1,24 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="C254MapDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zf3-yZ-6gU">
+                                <rect key="frame" x="0.0" y="169" width="393" height="615"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1000" minValue="100" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="wol-zn-8yx">
+                                <rect key="frame" x="30" y="720" width="333" height="34"/>
+                                <connections>
+                                    <action selector="changHeight:" destination="BYZ-38-t0r" eventType="valueChanged" id="UdQ-JX-yqg"/>
+                                </connections>
+                            </slider>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lth-iW-QLl">
+                                <rect key="frame" x="20" y="128" width="353" height="32"/>
+                                <segments>
+                                    <segment title="地圖"/>
+                                    <segment title="衛星"/>
+                                    <segment title="混合"/>
+                                    <segment title="鳥瞰照"/>
+                                    <segment title="鳥瞰圖"/>
+                                    <segment title="淡化"/>
+                                </segments>
+                                <connections>
+                                    <action selector="setMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="YKk-lj-G2U"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6i6-3y-Ked">
+                                <rect key="frame" x="16" y="175" width="92" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="台北車站"/>
+                                <connections>
+                                    <action selector="goTaipeiStation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZMZ-27-BHX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaP-uO-l7H">
+                                <rect key="frame" x="118" y="175" width="91.666666666666686" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="示範地點"/>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="right" contentVerticalAlignment="fill" translatesAutoresizingMaskIntoConstraints="NO" id="gqY-EB-3qX">
+                                <rect key="frame" x="16" y="218" width="63" height="28"/>
+                                <connections>
+                                    <action selector="rotation:" destination="BYZ-38-t0r" eventType="valueChanged" id="FLa-xT-LRe"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cg4-lS-2h0">
+                                <rect key="frame" x="16" y="262" width="63" height="28"/>
+                            </switch>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wol-zn-8yx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="3Lo-gw-Ih3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wol-zn-8yx" secondAttribute="bottom" constant="30" id="41d-CX-Obw"/>
+                            <constraint firstItem="6i6-3y-Ked" firstAttribute="top" secondItem="lth-iW-QLl" secondAttribute="bottom" constant="16" id="697-1F-voS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zf3-yZ-6gU" secondAttribute="trailing" id="84Q-bl-c9H"/>
+                            <constraint firstItem="gqY-EB-3qX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="89j-mb-Nh2"/>
+                            <constraint firstItem="lth-iW-QLl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="AIx-ec-c4B"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Zf3-yZ-6gU" secondAttribute="bottom" id="Fvh-G4-OVy"/>
+                            <constraint firstItem="KaP-uO-l7H" firstAttribute="centerY" secondItem="6i6-3y-Ked" secondAttribute="centerY" id="G8W-Ji-lXh"/>
+                            <constraint firstItem="lth-iW-QLl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="HQy-fm-19P"/>
+                            <constraint firstItem="Zf3-yZ-6gU" firstAttribute="top" secondItem="lth-iW-QLl" secondAttribute="bottom" constant="10" id="Knh-G2-WfZ"/>
+                            <constraint firstItem="KaP-uO-l7H" firstAttribute="leading" secondItem="6i6-3y-Ked" secondAttribute="trailing" constant="10" id="O9y-T7-JTS"/>
+                            <constraint firstItem="cg4-lS-2h0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="SLs-Hd-Qz7"/>
+                            <constraint firstItem="6i6-3y-Ked" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XAT-Su-6bH"/>
+                            <constraint firstItem="Zf3-yZ-6gU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bka-AS-dQo"/>
+                            <constraint firstItem="cg4-lS-2h0" firstAttribute="top" secondItem="gqY-EB-3qX" secondAttribute="bottom" constant="16" id="d5N-gc-V9J"/>
+                            <constraint firstItem="gqY-EB-3qX" firstAttribute="top" secondItem="6i6-3y-Ked" secondAttribute="bottom" constant="8" id="pag-wM-094"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wol-zn-8yx" secondAttribute="trailing" constant="30" id="sBJ-bW-zyF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lth-iW-QLl" secondAttribute="trailing" constant="20" id="uSh-oi-PSb"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="camHeightSlideer" destination="wol-zn-8yx" id="Kfi-xa-iuV"/>
+                        <outlet property="landmarkSelectButton" destination="KaP-uO-l7H" id="Spg-2F-5jl"/>
+                        <outlet property="mapView" destination="Zf3-yZ-6gU" id="BWl-NK-MbV"/>
+                        <outlet property="rotationSwitch" destination="gqY-EB-3qX" id="PmX-67-UmL"/>
+                        <outlet property="trackingSwitch" destination="cg4-lS-2h0" id="ioO-C2-FhN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139.69465648854961" y="134.50704225352112"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
