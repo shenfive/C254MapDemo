@@ -82,7 +82,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.requestWhenInUseAuthorization() //要求授權使用者位置
+//        locationManager.requestWhenInUseAuthorization() //要求授權使用者位置
 
         locationManager.delegate = self //指定代理人
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //指定精準度
@@ -331,31 +331,30 @@ extension ViewController:CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-        case .notDetermined:
+        case .notDetermined: //未設定
             locationManager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
+        case .restricted, .denied:  //已拒絕
             showAlertForSettings() // 提示使用者前往設定頁面授權
-        case .authorizedAlways, .authorizedWhenInUse:
-            // 已獲取授權
+        case .authorizedAlways, .authorizedWhenInUse: // 已獲取授權
             break
         @unknown default:
-            break
+            locationManager.requestWhenInUseAuthorization()
         }
     }
     
     
 }
 
-extension ViewController:MKMapViewDelegate{
-    // MARK: - MKMapViewDelegate
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let circleOverlay = overlay as? MKCircle {
-            let renderer = MKCircleRenderer(circle: circleOverlay)
-            renderer.fillColor = UIColor.systemBlue.withAlphaComponent(0.2) // 半透明填色
-            renderer.strokeColor = UIColor.systemBlue                      // 邊框顏色
-            renderer.lineWidth = 2
-            return renderer
-        }
-        return MKOverlayRenderer(overlay: overlay)
-    }
-}
+//extension ViewController:MKMapViewDelegate{
+//    // MARK: - MKMapViewDelegate
+//    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        if let circleOverlay = overlay as? MKCircle {
+//            let renderer = MKCircleRenderer(circle: circleOverlay)
+//            renderer.fillColor = UIColor.systemBlue.withAlphaComponent(0.2) // 半透明填色
+//            renderer.strokeColor = UIColor.systemBlue                      // 邊框顏色
+//            renderer.lineWidth = 2
+//            return renderer
+//        }
+//        return MKOverlayRenderer(overlay: overlay)
+//    }
+//}
